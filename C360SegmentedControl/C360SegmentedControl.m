@@ -20,18 +20,6 @@
 
 @implementation C360SegmentedControl
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self)
-    {
-        _items = [NSMutableArray array];
-        _segments = [NSMutableArray array];
-        _selectedSegmentIndex = C360SegmentedControlNoSegment;
-    }
-    return self;
-}
-
 - (id)initWithItems:(NSArray *)items
 {
     self = [super initWithFrame:CGRectZero];
@@ -45,16 +33,31 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        [self commonSetup];
+    }
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        _items = [NSMutableArray array];
-        _segments = [NSMutableArray array];
-        _selectedSegmentIndex = C360SegmentedControlNoSegment;
+        [self commonSetup];
     }
     return self;
+}
+
+- (void)commonSetup
+{
+    _items = [NSMutableArray array];
+    _segments = [NSMutableArray array];
+    _selectedSegmentIndex = C360SegmentedControlNoSegment;
 }
 
 - (NSUInteger)numberOfSegments

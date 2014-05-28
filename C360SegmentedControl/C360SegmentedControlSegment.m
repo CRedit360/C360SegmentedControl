@@ -26,7 +26,7 @@
     if (self)
     {
         _contentEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4);
-        _highlightColor = [UIColor lightTextColor];
+        _highlightColor = [UIColor whiteColor];
         
         _shapeLayer = [[CAShapeLayer alloc] init];
         [self.layer addSublayer:_shapeLayer];
@@ -35,7 +35,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-        _titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        _titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _titleLabel.numberOfLines = 0;
         [self addSubview:_titleLabel];
@@ -182,7 +182,10 @@
     CGFloat maxX = self.lastColumn ? width - lineWidth/2 : width + lineWidth/2;
     CGFloat minY = lineWidth/2;
     CGFloat maxY = self.lastRow ? height - lineWidth/2 : height + lineWidth/2;
-    CGFloat radius = 4 - lineWidth/2;
+    
+    CGFloat radius = 4;
+    if (radius > width/2) radius = width/2;
+    if (radius > height/2) radius = height/2;
     
     [bezierPath moveToPoint:CGPointMake(midX, minY)];
     
