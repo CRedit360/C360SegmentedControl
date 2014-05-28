@@ -111,4 +111,9 @@
     sender.selected = self.segmentedControl.momentary;
 }
 
+- (IBAction)changeOrdering:(UISegmentedControl *)sender
+{
+    self.segmentedControl.packingAlgorithm = (C360SegmentedControlPackingAlgorithm)sender.selectedSegmentIndex;
+}
+
 @end

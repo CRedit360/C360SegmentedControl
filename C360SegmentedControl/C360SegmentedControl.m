@@ -86,10 +86,12 @@
     
     [self.items insertObject:item atIndex:index];
     
-    // direct access to ivar to avoid side-effects
-    if ((_selectedSegmentIndex != C360SegmentedControlNoSegment) && (index <= _selectedSegmentIndex))
+    if ((self.selectedSegmentIndex != C360SegmentedControlNoSegment) && (index <= self.selectedSegmentIndex))
     {
+        // direct access to ivar to avoid side-effects
         _selectedSegmentIndex++;
+        
+        NSLog(@"Selected index is now %zd", self.selectedSegmentIndex);
     }
     
     newSegment = [[C360SegmentedControlSegment alloc] init];
@@ -121,6 +123,13 @@
     if (index == self.selectedSegmentIndex)
     {
         self.selectedSegmentIndex = C360SegmentedControlNoSegment;
+    }
+    else if ((self.selectedSegmentIndex != C360SegmentedControlNoSegment) && (index < self.selectedSegmentIndex))
+    {
+        // direct access to ivar to avoid side-effects
+        _selectedSegmentIndex--;
+        
+        NSLog(@"Selected index is now %zd", self.selectedSegmentIndex);
     }
     
     if (animated)
@@ -303,6 +312,14 @@
 
 #pragma mark - Layout
 
+- (void)setPackingAlgorithm:(C360SegmentedControlPackingAlgorithm)packingAlgorithm
+{
+    _packingAlgorithm = packingAlgorithm;
+    
+    [self invalidateIntrinsicContentSize];
+    [self setNeedsLayout];
+}
+
 - (CGSize)intrinsicContentSize
 {
     return [self sizeThatFits:self.bounds.size];
@@ -333,25 +350,24 @@
         CGSize size = [segment sizeThatFits:availableSize];
         size.width = ceilf(size.width);
         size.height = ceilf(size.height);
-        NSLog(@"Size for %zd: %@", i, NSStringFromCGSize(size));
         sizes[i] = [NSValue valueWithCGSize:size];
     }
     
     CGFloat top = 0, left = 0;
     
     NSArray *rows = nil; // TODO
-    switch (self.ordering)
+    switch (self.packingAlgorithm)
     {
-        case C360SegmentedControlPreserveOrdering:
+        case C360SegmentedControlNextFitPreserveOrdering:
             rows = [self groupSizesPreservingOrdering:sizes intoRowsWithWidth:width];
             break;
             
-        case C360SegmentedControlAllowReordering:
-            rows = [self groupSizesAllowingReordering:sizes intoRowsWithWidth:width];
+        case C360SegmentedControlBestFitDecreasingHeight:
+            rows = [self groupSizesDecreasingHeight:sizes intoRowsWithWidth:width];
             break;
+            
+            
     }
-    
-    NSLog(@"Rows: %@", rows);
     
     for (NSInteger rowIndex = 0; rowIndex < rows.count; rowIndex++)
     {
@@ -434,10 +450,65 @@
     return rows;
 }
 
-- (NSArray *)groupSizesAllowingReordering:(NSArray *)sizes
+- (NSArray *)groupSizesDecreasingHeight:(NSArray *)sizes
                         intoRowsWithWidth:(CGFloat)width
 {
-    return nil; // TODO
+    NSMutableDictionary *sizesByIndex = [NSMutableDictionary dictionaryWithCapacity:sizes.count];
+    for (NSUInteger i = 0; i < sizes.count; i++)
+    {
+        sizesByIndex[@(i)] = sizes[i];
+    }
+    
+    NSArray *sortedItemIndices = [sizesByIndex.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSNumber *index1, NSNumber *index2) {
+        
+        CGSize size1 = [sizesByIndex[index1] CGSizeValue];
+        CGSize size2 = [sizesByIndex[index2] CGSizeValue];
+        
+        if (size1.height < size2.height) return NSOrderedDescending;
+        if (size1.height > size2.height) return NSOrderedAscending;
+        
+        if (index1.integerValue < index2.integerValue) return NSOrderedAscending;
+        if (index1.integerValue > index2.integerValue) return NSOrderedDescending;
+        
+        return NSOrderedSame;
+        
+    }];
+    
+    NSMutableArray *rows = [NSMutableArray arrayWithCapacity:sizes.count];
+    NSMutableArray *rowWidths = [NSMutableArray arrayWithCapacity:sizes.count];
+    
+    for (NSNumber *itemIndex in sortedItemIndices)
+    {
+        CGSize size = [sizesByIndex[itemIndex] CGSizeValue];
+        
+        CGFloat bestFitRemainder = 0;
+        NSInteger bestFitRowIndex = NSNotFound;
+        
+        for (NSUInteger rowIndex = 0; rowIndex < rows.count; rowIndex++)
+        {
+            CGFloat rowWidth = [rowWidths[rowIndex] floatValue];
+            CGFloat remainder = width - (rowWidth + size.width);
+            
+            if (remainder > bestFitRemainder)
+            {
+                bestFitRemainder = remainder;
+                bestFitRowIndex = rowIndex;
+            }
+        }
+        
+        if (bestFitRowIndex == NSNotFound)
+        {
+            bestFitRowIndex = rows.count;
+            
+            [rows addObject:[NSMutableArray array]];
+            [rowWidths addObject:@(0)];
+        }
+        
+        [rows[bestFitRowIndex] addObject:itemIndex];
+        rowWidths[bestFitRowIndex] = @([rowWidths[bestFitRowIndex] floatValue] + size.width);
+    }
+    
+    return rows;
 }
 
 @end

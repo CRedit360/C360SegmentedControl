@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, C360SegmentedControlOrdering)
+// see http://cgi.csc.liv.ac.uk/~epa/surveyhtml.html
+typedef NS_ENUM(NSInteger, C360SegmentedControlPackingAlgorithm)
 {
-    C360SegmentedControlPreserveOrdering,
-    C360SegmentedControlAllowReordering
+    C360SegmentedControlNextFitPreserveOrdering,
+    C360SegmentedControlBestFitDecreasingHeight
 };
 
 #define C360SegmentedControlNoSegment UISegmentedControlNoSegment
@@ -42,6 +43,6 @@ typedef NS_ENUM(NSInteger, C360SegmentedControlOrdering)
 @property (nonatomic) NSInteger selectedSegmentIndex;
 
 @property (nonatomic) UIColor *highlightColor;
-@property (nonatomic, readonly) C360SegmentedControlOrdering ordering;
+@property (nonatomic) C360SegmentedControlPackingAlgorithm packingAlgorithm;
 
 @end
