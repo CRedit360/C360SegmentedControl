@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="C360DemoController">
+            <connections>
+                <outlet property="segmentedControl" destination="tiO-lZ-qvL" id="A1m-9b-b5b"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="UIScrollView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="98" translatesAutoresizingMaskIntoConstraints="NO" id="tiO-lZ-qvL" customClass="C360SegmentedControl">
+                    <rect key="frame" x="20" y="40" width="280" height="98"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRn-uG-CaE">
+                    <rect key="frame" x="20" y="146" width="67" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Short title">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="insertSegmentWithShortTitle:" destination="-1" eventType="touchUpInside" id="5P3-Jw-nK4"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceD-6I-wjP">
+                    <rect key="frame" x="128" y="146" width="64" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Long title">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="insertSegmentWithLongTitle:" destination="-1" eventType="touchUpInside" id="rwS-dN-JWe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqd-Ku-bvg">
+                    <rect key="frame" x="257" y="146" width="43" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Image">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="insertSegmentWithImage:" destination="-1" eventType="touchUpInside" id="1Y3-vO-wHx"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syl-Dx-OI4">
+                    <rect key="frame" x="20" y="184" width="86" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Remove one">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="removeSegment:" destination="-1" eventType="touchUpInside" id="qlf-SQ-vwe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVH-Rt-Yeh">
+                    <rect key="frame" x="224" y="184" width="76" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Remove all">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="removeAllSegments:" destination="-1" eventType="touchUpInside" id="fCn-8l-tgn"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaQ-NT-ide">
+                    <rect key="frame" x="20" y="222" width="118" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Replace with title">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="replaceSegmentWithTitle:" destination="-1" eventType="touchUpInside" id="0B0-Mh-Zxr"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQa-oD-bIn">
+                    <rect key="frame" x="165" y="222" width="135" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Replace with image">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="replaceSegmentWithImage:" destination="-1" eventType="touchUpInside" id="OOC-wk-6h5"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdm-ub-Im8">
+                    <rect key="frame" x="20" y="260" width="43" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Select">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="selectSegment:" destination="-1" eventType="touchUpInside" id="w7y-tr-tTe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-z7-htn">
+                    <rect key="frame" x="78" y="260" width="60" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Deselect">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="deselectSegment:" destination="-1" eventType="touchUpInside" id="Hrp-ta-Hhe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0W-om-UYb">
+                    <rect key="frame" x="222" y="260" width="78" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Momentary">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="toggleMomentary:" destination="-1" eventType="touchUpInside" id="KXh-cz-hRY"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="XVH-Rt-Yeh" firstAttribute="top" secondItem="jqd-Ku-bvg" secondAttribute="bottom" constant="8" id="0W9-QQ-Awa"/>
+                <constraint firstItem="tiO-lZ-qvL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="1E2-59-QAE"/>
+                <constraint firstItem="Bdm-ub-Im8" firstAttribute="top" secondItem="LaQ-NT-ide" secondAttribute="bottom" constant="8" id="3hA-mh-nPF"/>
+                <constraint firstItem="LEY-z7-htn" firstAttribute="top" secondItem="LaQ-NT-ide" secondAttribute="bottom" constant="8" id="7DX-Sn-hfq"/>
+                <constraint firstAttribute="centerX" secondItem="tiO-lZ-qvL" secondAttribute="centerX" id="8eH-kO-fSp"/>
+                <constraint firstAttribute="trailing" secondItem="jqd-Ku-bvg" secondAttribute="trailing" constant="20" id="FBx-yC-kKB"/>
+                <constraint firstItem="qRn-uG-CaE" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="Fb2-GO-hpk"/>
+                <constraint firstItem="syl-Dx-OI4" firstAttribute="top" secondItem="qRn-uG-CaE" secondAttribute="bottom" constant="8" id="HGN-5w-N5f"/>
+                <constraint firstAttribute="trailing" secondItem="syl-Dx-OI4" secondAttribute="trailing" constant="214" id="I2E-CZ-jcc"/>
+                <constraint firstAttribute="trailing" secondItem="gQa-oD-bIn" secondAttribute="trailing" constant="20" id="K2b-kc-T7E"/>
+                <constraint firstItem="LaQ-NT-ide" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="MAd-tS-D2v"/>
+                <constraint firstAttribute="centerX" secondItem="ceD-6I-wjP" secondAttribute="centerX" id="Q5Y-v3-ey0"/>
+                <constraint firstAttribute="trailing" secondItem="tiO-lZ-qvL" secondAttribute="trailing" constant="20" id="WZo-B8-CYS"/>
+                <constraint firstItem="a0W-om-UYb" firstAttribute="top" secondItem="gQa-oD-bIn" secondAttribute="bottom" constant="8" id="Y4W-4g-KrV"/>
+                <constraint firstItem="tiO-lZ-qvL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="Yr4-a5-FnO"/>
+                <constraint firstAttribute="trailing" secondItem="a0W-om-UYb" secondAttribute="trailing" constant="20" id="bnT-ar-xbf"/>
+                <constraint firstItem="LaQ-NT-ide" firstAttribute="top" secondItem="syl-Dx-OI4" secondAttribute="bottom" constant="8" id="dI0-XN-h3Z"/>
+                <constraint firstAttribute="trailing" secondItem="XVH-Rt-Yeh" secondAttribute="trailing" constant="20" id="gfc-iB-1uG"/>
+                <constraint firstItem="Bdm-ub-Im8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="iH8-7M-z5T"/>
+                <constraint firstItem="ceD-6I-wjP" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="l7S-l3-Wn3"/>
+                <constraint firstItem="gQa-oD-bIn" firstAttribute="top" secondItem="XVH-Rt-Yeh" secondAttribute="bottom" constant="8" id="l8t-8o-fPY"/>
+                <constraint firstItem="jqd-Ku-bvg" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="mb0-Vr-wrx"/>
+                <constraint firstItem="qRn-uG-CaE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qUW-9M-anh"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>
