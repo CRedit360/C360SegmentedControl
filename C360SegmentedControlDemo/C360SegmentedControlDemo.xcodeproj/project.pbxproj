@@ -40,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F637E34F19372B91004673DA /* C360SegmentedControl.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = C360SegmentedControl.podspec; path = ../C360SegmentedControl.podspec; sourceTree = "<group>"; };
+		F637E35019372B91004673DA /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F6B7E6691935D9A100D5DD7D /* C360SegmentedControlDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C360SegmentedControlDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6B7E66C1935D9A100D5DD7D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F6B7E66E1935D9A100D5DD7D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -93,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F637E34E19372B83004673DA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F637E34F19372B91004673DA /* C360SegmentedControl.podspec */,
+				F637E35019372B91004673DA /* LICENSE */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F6B7E6601935D9A100D5DD7D = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +186,7 @@
 				F6B7E69E1935DA3900D5DD7D /* C360SegmentedControl.m */,
 				F6B7E6A01935E16600D5DD7D /* C360SegmentedControlSegment.h */,
 				F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegment.m */,
+				F637E34E19372B83004673DA /* Supporting Files */,
 			);
 			name = C360SegmentedControl;
 			path = ../C360SegmentedControl;
