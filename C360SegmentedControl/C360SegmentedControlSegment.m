@@ -94,6 +94,12 @@
     }
 }
 
+- (void)setContentOffset:(CGSize)contentOffset
+{
+    _contentOffset = contentOffset;
+    [self setNeedsLayout];
+}
+
 - (void)setFirstRow:(BOOL)firstRow
 {
     _firstRow = firstRow;
@@ -167,7 +173,10 @@
 {
     [super layoutSubviews];
     
-    CGRect contentBounds = UIEdgeInsetsInsetRect(self.bounds, self.contentEdgeInsets);
+    CGRect contentBounds = self.bounds;
+    contentBounds = UIEdgeInsetsInsetRect(contentBounds, self.contentEdgeInsets);
+    contentBounds = CGRectOffset(contentBounds, self.contentOffset.width, self.contentOffset.height);
+    
     self.titleLabel.frame = contentBounds;
     self.imageView.frame = contentBounds;
     
