@@ -23,6 +23,9 @@ typedef NS_ENUM(NSInteger, C360SegmentedControlPackingAlgorithm)
 @property (nonatomic, getter=isMomentary) BOOL momentary;
 @property (nonatomic, readonly) NSUInteger numberOfSegments;
 
+@property (nonatomic) BOOL apportionsSegmentWidthsByContent;
+@property (nonatomic) BOOL apportionsRowHeightsByContent;
+
 - (void)insertSegmentWithTitle:(NSString *)title atIndex:(NSUInteger)segment animated:(BOOL)animated;
 - (void)insertSegmentWithImage:(UIImage *)image  atIndex:(NSUInteger)segment animated:(BOOL)animated;
 - (void)removeSegmentAtIndex:(NSUInteger)segment animated:(BOOL)animated;

@@ -116,4 +116,16 @@
     self.segmentedControl.packingAlgorithm = (C360SegmentedControlPackingAlgorithm)sender.selectedSegmentIndex;
 }
 
+- (IBAction)toggleApportionWidthsByContent:(UIButton *)sender
+{
+    self.segmentedControl.apportionsSegmentWidthsByContent = !self.segmentedControl.apportionsSegmentWidthsByContent;
+    sender.selected = self.segmentedControl.apportionsSegmentWidthsByContent;
+}
+
+- (IBAction)toggleApportionHeightsByContent:(UIButton *)sender
+{
+    self.segmentedControl.apportionsRowHeightsByContent = !self.segmentedControl.apportionsRowHeightsByContent;
+    sender.selected =  self.segmentedControl.apportionsRowHeightsByContent;
+}
+
 @end

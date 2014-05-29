@@ -309,6 +309,22 @@
     [self setNeedsLayout];
 }
 
+- (void)setApportionsSegmentWidthsByContent:(BOOL)apportionsSegmentWidthsByContent
+{
+    _apportionsSegmentWidthsByContent = apportionsSegmentWidthsByContent;
+    
+    [self invalidateIntrinsicContentSize];
+    [self setNeedsLayout];
+}
+
+- (void)setApportionsRowHeightsByContent:(BOOL)apportionsRowHeightsByContent
+{
+    _apportionsRowHeightsByContent = apportionsRowHeightsByContent;
+    
+    [self invalidateIntrinsicContentSize];
+    [self setNeedsLayout];
+}
+
 - (CGSize)intrinsicContentSize
 {
     return [self sizeThatFits:self.bounds.size];
@@ -345,16 +361,30 @@
     
     CGFloat top = 0, left = 0;
     
-    NSArray *rows = nil; // TODO
+    NSArray *rows = nil;
+    BOOL equalSegmentWidths = !self.apportionsSegmentWidthsByContent;
     switch (self.packingAlgorithm)
     {
         case C360SegmentedControlNextFitPreserveOrdering:
-            rows = [self groupSizesPreservingOrdering:sizes intoRowsWithWidth:width];
+            rows = [self groupSizesByNextFitPreservingOrdering:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
             break;
             
         case C360SegmentedControlBestFitDecreasingHeight:
-            rows = [self groupSizesDecreasingHeight:sizes intoRowsWithWidth:width];
+            rows = [self groupSizesByBestFitDecreasingHeight:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
             break;
+    }
+    
+    CGFloat minimumRowHeight = self.minimumRowHeight;
+    if (!self.apportionsRowHeightsByContent)
+    {
+        for (NSArray *columns in rows)
+        {
+            for (NSNumber *itemIndexNumber in columns)
+            {
+                CGSize size = [sizes[itemIndexNumber.integerValue] CGSizeValue];
+                minimumRowHeight = MAX(minimumRowHeight, size.height);
+            }
+        }
     }
     
     for (NSUInteger rowIndex = 0; rowIndex < rows.count; rowIndex++)
@@ -362,7 +392,7 @@
         BOOL isLastRow = (rowIndex == rows.count - 1);
         
         NSArray *columns = rows[rowIndex];
-        CGFloat rowHeight = self.minimumRowHeight, rowWidth = 0;
+        CGFloat rowHeight = minimumRowHeight, rowWidth = 0;
         
         for (NSNumber *indexNumber in columns)
         {
@@ -386,6 +416,10 @@
                 {
                     itemWidth = width - usedWidth;
                 }
+                else if (equalSegmentWidths)
+                {
+                    itemWidth = roundf(width / columns.count);
+                }
                 else
                 {
                     CGSize size = [sizes[itemIndex] CGSizeValue];
@@ -408,18 +442,47 @@
     return top;
 }
 
-- (NSArray *)groupSizesPreservingOrdering:(NSArray *)sizes
-                        intoRowsWithWidth:(CGFloat)width
+- (CGFloat)rowWidthByAddingSegmentWithWidth:(CGFloat)width sizes:(NSArray *)sizes currentRow:(NSArray *)currentRow equalSegmentWidths:(BOOL)equalSegmentWidths
+{
+    CGFloat rowWidthWithSegment = 0;
+    if (equalSegmentWidths)
+    {
+        CGFloat maxItemWidth = width;
+        
+        for (NSNumber *itemIndex in currentRow)
+        {
+            CGFloat itemWidth = [sizes[itemIndex.integerValue] CGSizeValue].width;
+            maxItemWidth = MAX(maxItemWidth, itemWidth);
+        }
+        
+        rowWidthWithSegment = maxItemWidth * (currentRow.count + 1);
+    }
+    else
+    {
+        for (NSNumber *itemIndex in currentRow)
+        {
+            CGFloat itemWidth = [sizes[itemIndex.integerValue] CGSizeValue].width;
+            rowWidthWithSegment += itemWidth;
+        }
+        
+        rowWidthWithSegment += width;
+    }
+    return rowWidthWithSegment;
+}
+
+- (NSArray *)groupSizesByNextFitPreservingOrdering:(NSArray *)sizes
+                                 intoRowsWithWidth:(CGFloat)width
+                                equalSegmentWidths:(BOOL)equalSegmentWidths
 {
     NSMutableArray *rows = [NSMutableArray arrayWithCapacity:sizes.count];
     NSMutableArray *currentRow = nil;
-    CGFloat currentRowWidth = 0;
     
     for (NSUInteger i = 0; i < sizes.count; i++)
     {
         CGFloat itemWidth = [sizes[i] CGSizeValue].width;
+        CGFloat rowWidthWithSegment = [self rowWidthByAddingSegmentWithWidth:itemWidth sizes:sizes currentRow:currentRow equalSegmentWidths:equalSegmentWidths];
         
-        if (currentRowWidth + itemWidth > width)
+        if (rowWidthWithSegment > width)
         {
             currentRow = nil;
         }
@@ -428,18 +491,17 @@
         {
             currentRow = [NSMutableArray arrayWithCapacity:sizes.count];
             [rows addObject:currentRow];
-            currentRowWidth = 0;
         }
         
         [currentRow addObject:@(i)];
-        currentRowWidth += itemWidth;
     }
     
     return rows;
 }
 
-- (NSArray *)groupSizesDecreasingHeight:(NSArray *)sizes
-                        intoRowsWithWidth:(CGFloat)width
+- (NSArray *)groupSizesByBestFitDecreasingHeight:(NSArray *)sizes
+                               intoRowsWithWidth:(CGFloat)width
+                              equalSegmentWidths:(BOOL)equalSegmentWidths
 {
     NSMutableDictionary *sizesByIndex = [NSMutableDictionary dictionaryWithCapacity:sizes.count];
     for (NSUInteger i = 0; i < sizes.count; i++)
@@ -463,19 +525,20 @@
     }];
     
     NSMutableArray *rows = [NSMutableArray arrayWithCapacity:sizes.count];
-    NSMutableArray *rowWidths = [NSMutableArray arrayWithCapacity:sizes.count];
     
     for (NSNumber *itemIndex in sortedItemIndices)
     {
-        CGSize size = [sizesByIndex[itemIndex] CGSizeValue];
+        CGFloat itemWidth = [sizes[itemIndex.integerValue] CGSizeValue].width;
         
         CGFloat bestFitRemainder = 0;
         NSInteger bestFitRowIndex = NSNotFound;
         
         for (NSUInteger rowIndex = 0; rowIndex < rows.count; rowIndex++)
         {
-            CGFloat rowWidth = [rowWidths[rowIndex] floatValue];
-            CGFloat remainder = width - (rowWidth + size.width);
+            NSArray *currentRow = rows[rowIndex];
+            CGFloat rowWidthWithSegment = [self rowWidthByAddingSegmentWithWidth:itemWidth sizes:sizes currentRow:currentRow equalSegmentWidths:equalSegmentWidths];
+            
+            CGFloat remainder = width - rowWidthWithSegment;
             
             if (remainder > bestFitRemainder)
             {
@@ -489,11 +552,9 @@
             bestFitRowIndex = rows.count;
             
             [rows addObject:[NSMutableArray array]];
-            [rowWidths addObject:@(0)];
         }
         
         [rows[bestFitRowIndex] addObject:itemIndex];
-        rowWidths[bestFitRowIndex] = @([rowWidths[bestFitRowIndex] floatValue] + size.width);
     }
     
     return rows;

@@ -99,7 +99,7 @@
                         <action selector="selectSegment:" destination="-1" eventType="touchUpInside" id="w7y-tr-tTe"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-z7-htn">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-z7-htn">
                     <rect key="frame" x="78" y="260" width="60" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Deselect">
@@ -120,16 +120,36 @@
                     </connections>
                 </button>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="I2s-Jw-Z3Y">
-                    <rect key="frame" x="48" y="298" width="225" height="29"/>
+                    <rect key="frame" x="93" y="298" width="135" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <segments>
-                        <segment title="Preserve order"/>
-                        <segment title="Allow reordering"/>
+                        <segment title="Preserve"/>
+                        <segment title="Reorder"/>
                     </segments>
                     <connections>
                         <action selector="changeOrdering:" destination="-1" eventType="valueChanged" id="XGK-Te-SSh"/>
                     </connections>
                 </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmC-bS-kgB">
+                    <rect key="frame" x="20" y="334" width="96" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Variable width">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="toggleApportionWidthsByContent:" destination="-1" eventType="touchUpInside" id="mWH-Rl-3k5"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIT-9G-gtB">
+                    <rect key="frame" x="212" y="334" width="101" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Variable height">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="toggleApportionHeightsByContent:" destination="-1" eventType="touchUpInside" id="eJp-01-dYP"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -138,10 +158,12 @@
                 <constraint firstItem="Bdm-ub-Im8" firstAttribute="top" secondItem="LaQ-NT-ide" secondAttribute="bottom" constant="8" id="3hA-mh-nPF"/>
                 <constraint firstItem="LEY-z7-htn" firstAttribute="top" secondItem="LaQ-NT-ide" secondAttribute="bottom" constant="8" id="7DX-Sn-hfq"/>
                 <constraint firstAttribute="centerX" secondItem="tiO-lZ-qvL" secondAttribute="centerX" id="8eH-kO-fSp"/>
-                <constraint firstAttribute="centerX" secondItem="I2s-Jw-Z3Y" secondAttribute="centerX" constant="-0.5" id="8jt-a2-VFr"/>
+                <constraint firstAttribute="trailing" secondItem="iIT-9G-gtB" secondAttribute="trailing" constant="7" id="AGx-ZQ-Hqm"/>
                 <constraint firstAttribute="trailing" secondItem="jqd-Ku-bvg" secondAttribute="trailing" constant="20" id="FBx-yC-kKB"/>
+                <constraint firstItem="I2s-Jw-Z3Y" firstAttribute="top" secondItem="Bdm-ub-Im8" secondAttribute="bottom" constant="8" id="Fb1-QJ-Hp3"/>
                 <constraint firstItem="qRn-uG-CaE" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="Fb2-GO-hpk"/>
                 <constraint firstItem="syl-Dx-OI4" firstAttribute="top" secondItem="qRn-uG-CaE" secondAttribute="bottom" constant="8" id="HGN-5w-N5f"/>
+                <constraint firstAttribute="centerX" secondItem="I2s-Jw-Z3Y" secondAttribute="centerX" constant="-0.5" id="HXp-Li-SfS"/>
                 <constraint firstAttribute="trailing" secondItem="gQa-oD-bIn" secondAttribute="trailing" constant="20" id="K2b-kc-T7E"/>
                 <constraint firstItem="LaQ-NT-ide" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="MAd-tS-D2v"/>
                 <constraint firstAttribute="centerX" secondItem="ceD-6I-wjP" secondAttribute="centerX" id="Q5Y-v3-ey0"/>
@@ -149,15 +171,18 @@
                 <constraint firstAttribute="trailing" secondItem="tiO-lZ-qvL" secondAttribute="trailing" constant="20" id="WZo-B8-CYS"/>
                 <constraint firstItem="a0W-om-UYb" firstAttribute="top" secondItem="gQa-oD-bIn" secondAttribute="bottom" constant="8" id="Y4W-4g-KrV"/>
                 <constraint firstItem="tiO-lZ-qvL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="Yr4-a5-FnO"/>
+                <constraint firstItem="YmC-bS-kgB" firstAttribute="top" secondItem="I2s-Jw-Z3Y" secondAttribute="bottom" constant="8" id="ZsV-7M-JhZ"/>
                 <constraint firstAttribute="trailing" secondItem="a0W-om-UYb" secondAttribute="trailing" constant="20" id="bnT-ar-xbf"/>
                 <constraint firstItem="LaQ-NT-ide" firstAttribute="top" secondItem="syl-Dx-OI4" secondAttribute="bottom" constant="8" id="dI0-XN-h3Z"/>
                 <constraint firstAttribute="trailing" secondItem="XVH-Rt-Yeh" secondAttribute="trailing" constant="20" id="gfc-iB-1uG"/>
+                <constraint firstItem="LEY-z7-htn" firstAttribute="leading" secondItem="Bdm-ub-Im8" secondAttribute="trailing" constant="15" id="hFy-H2-PbI"/>
                 <constraint firstItem="Bdm-ub-Im8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="iH8-7M-z5T"/>
                 <constraint firstItem="ceD-6I-wjP" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="l7S-l3-Wn3"/>
                 <constraint firstItem="gQa-oD-bIn" firstAttribute="top" secondItem="XVH-Rt-Yeh" secondAttribute="bottom" constant="8" id="l8t-8o-fPY"/>
                 <constraint firstItem="jqd-Ku-bvg" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="mb0-Vr-wrx"/>
+                <constraint firstItem="iIT-9G-gtB" firstAttribute="top" secondItem="I2s-Jw-Z3Y" secondAttribute="bottom" constant="8" id="nsX-Ky-ujW"/>
                 <constraint firstItem="qRn-uG-CaE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qUW-9M-anh"/>
-                <constraint firstItem="I2s-Jw-Z3Y" firstAttribute="top" secondItem="LEY-z7-htn" secondAttribute="bottom" constant="8" id="vOe-rj-BqL"/>
+                <constraint firstItem="YmC-bS-kgB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="rw9-oD-LbH"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
