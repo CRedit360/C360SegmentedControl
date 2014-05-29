@@ -58,6 +58,7 @@
     _items = [NSMutableArray array];
     _segments = [NSMutableArray array];
     _selectedSegmentIndex = C360SegmentedControlNoSegment;
+    _minimumRowHeight = 32;
 }
 
 - (NSUInteger)numberOfSegments
@@ -104,8 +105,6 @@
     [self insertSubview:newSegment atIndex:index];
     
     [newSegment addTarget:self action:@selector(segmentTouchDown:) forControlEvents:UIControlEventTouchDown];
-    [newSegment addTarget:self action:@selector(segmentTouchUp:) forControlEvents:UIControlEventTouchUpInside];
-    [newSegment addTarget:self action:@selector(segmentTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
     
     [self invalidateIntrinsicContentSize];
     [self setNeedsLayout];
@@ -268,18 +267,13 @@
 {
     if (selectedSegmentIndex != _selectedSegmentIndex)
     {
-        if (!self.momentary && (_selectedSegmentIndex != C360SegmentedControlNoSegment))
-        {
-            C360SegmentedControlSegment *segment = self.segments[_selectedSegmentIndex];
-            [segment setSelected:NO];
-        }
-        
         _selectedSegmentIndex = selectedSegmentIndex;
         
-        if (!self.momentary && (selectedSegmentIndex != C360SegmentedControlNoSegment))
+        for (NSUInteger i = 0; i < self.numberOfSegments; i++)
         {
-            C360SegmentedControlSegment *segment = self.segments[selectedSegmentIndex];
-            [segment setSelected:YES];
+            C360SegmentedControlSegment *segment = self.segments[i];
+            BOOL selected = !self.momentary && ((NSInteger)i == selectedSegmentIndex);
+            [segment setSelected:selected];
         }
     }
 }
@@ -287,31 +281,23 @@
 - (void)segmentTouchDown:(C360SegmentedControlSegment *)sender
 {
     sender.momentarilySelected = YES;
-    sender.lastMomentarySelectionDate = [NSDate date];
+    
+    NSDate *selectionDate = [NSDate date];
+    sender.lastMomentarySelectionDate = selectionDate;
     
     self.selectedSegmentIndex = [self.segments indexOfObject:sender];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        if (sender.lastMomentarySelectionDate == selectionDate)
+        {
+            sender.momentarilySelected = NO;
+        }
+        
+    });
 }
 
-- (void)segmentTouchUp:(C360SegmentedControlSegment *)sender
-{
-    NSTimeInterval delay = [sender.lastMomentarySelectionDate timeIntervalSinceNow] + 0.1;
-    if (delay < 0)
-    {
-        sender.momentarilySelected = NO;
-    }
-    else
-    {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-           
-            if ([sender.lastMomentarySelectionDate timeIntervalSinceNow] + 0.1 < 0)
-            {
-                sender.momentarilySelected = NO;
-            }
-            
-        });
-    }
-}
 
 #pragma mark - Layout
 
@@ -353,6 +339,7 @@
         CGSize size = [segment sizeThatFits:availableSize];
         size.width = ceilf(size.width);
         size.height = ceilf(size.height);
+        if (size.height < self.minimumRowHeight) size.height = self.minimumRowHeight;
         sizes[i] = [NSValue valueWithCGSize:size];
     }
     
@@ -368,11 +355,9 @@
         case C360SegmentedControlBestFitDecreasingHeight:
             rows = [self groupSizesDecreasingHeight:sizes intoRowsWithWidth:width];
             break;
-            
-            
     }
     
-    for (NSInteger rowIndex = 0; rowIndex < rows.count; rowIndex++)
+    for (NSUInteger rowIndex = 0; rowIndex < rows.count; rowIndex++)
     {
         BOOL isLastRow = (rowIndex == rows.count - 1);
         
@@ -391,7 +376,7 @@
             CGFloat rowWidthScale = width / rowWidth;
             CGFloat usedWidth = 0;
             
-            for (NSInteger columnIndex = 0; columnIndex < columns.count; columnIndex++)
+            for (NSUInteger columnIndex = 0; columnIndex < columns.count; columnIndex++)
             {
                 BOOL isLastColumn = columnIndex == (columns.count - 1);
                 NSInteger itemIndex = [columns[columnIndex] integerValue];
@@ -430,7 +415,7 @@
     NSMutableArray *currentRow = nil;
     CGFloat currentRowWidth = 0;
     
-    for (NSInteger i = 0; i < sizes.count; i++)
+    for (NSUInteger i = 0; i < sizes.count; i++)
     {
         CGFloat itemWidth = [sizes[i] CGSizeValue].width;
         
@@ -464,11 +449,11 @@
     
     NSArray *sortedItemIndices = [sizesByIndex.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSNumber *index1, NSNumber *index2) {
         
-        CGSize size1 = [sizesByIndex[index1] CGSizeValue];
-        CGSize size2 = [sizesByIndex[index2] CGSizeValue];
+        CGFloat height1 = [sizesByIndex[index1] CGSizeValue].height;
+        CGFloat height2 = [sizesByIndex[index2] CGSizeValue].height;
         
-        if (size1.height < size2.height) return NSOrderedDescending;
-        if (size1.height > size2.height) return NSOrderedAscending;
+        if (height1 < height2) return NSOrderedDescending;
+        if (height1 > height2) return NSOrderedAscending;
         
         if (index1.integerValue < index2.integerValue) return NSOrderedAscending;
         if (index1.integerValue > index2.integerValue) return NSOrderedDescending;
