@@ -22,7 +22,7 @@
 
 - (id)initWithItems:(NSArray *)items
 {
-    self = [super initWithFrame:CGRectZero];
+    self = [self init];
     if (self)
     {
         for (NSUInteger i = 0; i < items.count; i++)
@@ -58,7 +58,7 @@
     _items = [NSMutableArray array];
     _segments = [NSMutableArray array];
     _selectedSegmentIndex = C360SegmentedControlNoSegment;
-    _minimumRowHeight = 32;
+    _minimumRowHeight = 29;
 }
 
 - (NSUInteger)numberOfSegments

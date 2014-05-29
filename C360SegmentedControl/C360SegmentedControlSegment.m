@@ -181,8 +181,7 @@
     self.imageView.frame = contentBounds;
     
     CGFloat width = self.bounds.size.width, height = self.bounds.size.height;
-    CGFloat scale = self.window.screen.scale;
-    CGFloat lineWidth = scale ? 1.0 / scale : 0;
+    CGFloat lineWidth = 1;
     
     UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
     
