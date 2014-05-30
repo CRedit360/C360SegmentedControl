@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F60B5E471938763A00B72078 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = F60B5E431938763A00B72078 /* first.png */; };
+		F60B5E481938763A00B72078 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F60B5E441938763A00B72078 /* first@2x.png */; };
+		F60B5E491938763A00B72078 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = F60B5E451938763A00B72078 /* second.png */; };
+		F60B5E4A1938763A00B72078 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F60B5E461938763A00B72078 /* second@2x.png */; };
 		F6B7E66D1935D9A100D5DD7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B7E66C1935D9A100D5DD7D /* Foundation.framework */; };
 		F6B7E66F1935D9A100D5DD7D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B7E66E1935D9A100D5DD7D /* CoreGraphics.framework */; };
 		F6B7E6711935D9A100D5DD7D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B7E6701935D9A100D5DD7D /* UIKit.framework */; };
@@ -21,10 +25,6 @@
 		F6B7E6921935D9A100D5DD7D /* C360SegmentedControlDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E6911935D9A100D5DD7D /* C360SegmentedControlDemoTests.m */; };
 		F6B7E69F1935DA3900D5DD7D /* C360SegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E69E1935DA3900D5DD7D /* C360SegmentedControl.m */; };
 		F6B7E6A21935E16600D5DD7D /* C360SegmentedControlSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegment.m */; };
-		F6B7E6B01936028000D5DD7D /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B7E6AC1936028000D5DD7D /* first.png */; };
-		F6B7E6B11936028000D5DD7D /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B7E6AD1936028000D5DD7D /* first@2x.png */; };
-		F6B7E6B21936028000D5DD7D /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B7E6AE1936028000D5DD7D /* second.png */; };
-		F6B7E6B31936028000D5DD7D /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6B7E6AF1936028000D5DD7D /* second@2x.png */; };
 		F6B7E6B8193602E100D5DD7D /* C360DemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E6B6193602E100D5DD7D /* C360DemoController.m */; };
 		F6B7E6B9193602E100D5DD7D /* C360DemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6B7E6B7193602E100D5DD7D /* C360DemoController.xib */; };
 /* End PBXBuildFile section */
@@ -40,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F60B5E431938763A00B72078 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		F60B5E441938763A00B72078 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		F60B5E451938763A00B72078 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		F60B5E461938763A00B72078 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		F637E34F19372B91004673DA /* C360SegmentedControl.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = C360SegmentedControl.podspec; path = ../C360SegmentedControl.podspec; sourceTree = "<group>"; };
 		F637E35019372B91004673DA /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F6B7E6691935D9A100D5DD7D /* C360SegmentedControlDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C360SegmentedControlDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,10 +66,6 @@
 		F6B7E69E1935DA3900D5DD7D /* C360SegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C360SegmentedControl.m; sourceTree = "<group>"; };
 		F6B7E6A01935E16600D5DD7D /* C360SegmentedControlSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C360SegmentedControlSegment.h; sourceTree = "<group>"; };
 		F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C360SegmentedControlSegment.m; sourceTree = "<group>"; };
-		F6B7E6AC1936028000D5DD7D /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = first.png; path = ../../../WorkflowSchema/WorkflowSchemaTests/Resources/first.png; sourceTree = "<group>"; };
-		F6B7E6AD1936028000D5DD7D /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "first@2x.png"; path = "../../../WorkflowSchema/WorkflowSchemaTests/Resources/first@2x.png"; sourceTree = "<group>"; };
-		F6B7E6AE1936028000D5DD7D /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = second.png; path = ../../../WorkflowSchema/WorkflowSchemaTests/Resources/second.png; sourceTree = "<group>"; };
-		F6B7E6AF1936028000D5DD7D /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "second@2x.png"; path = "../../../WorkflowSchema/WorkflowSchemaTests/Resources/second@2x.png"; sourceTree = "<group>"; };
 		F6B7E6B5193602E100D5DD7D /* C360DemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C360DemoController.h; sourceTree = "<group>"; };
 		F6B7E6B6193602E100D5DD7D /* C360DemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C360DemoController.m; sourceTree = "<group>"; };
 		F6B7E6B7193602E100D5DD7D /* C360DemoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C360DemoController.xib; sourceTree = "<group>"; };
@@ -195,10 +195,10 @@
 		F6B7E6B41936028400D5DD7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F6B7E6AC1936028000D5DD7D /* first.png */,
-				F6B7E6AD1936028000D5DD7D /* first@2x.png */,
-				F6B7E6AE1936028000D5DD7D /* second.png */,
-				F6B7E6AF1936028000D5DD7D /* second@2x.png */,
+				F60B5E431938763A00B72078 /* first.png */,
+				F60B5E441938763A00B72078 /* first@2x.png */,
+				F60B5E451938763A00B72078 /* second.png */,
+				F60B5E461938763A00B72078 /* second@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -279,13 +279,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6B7E6B01936028000D5DD7D /* first.png in Resources */,
-				F6B7E6B11936028000D5DD7D /* first@2x.png in Resources */,
+				F60B5E471938763A00B72078 /* first.png in Resources */,
+				F60B5E4A1938763A00B72078 /* second@2x.png in Resources */,
 				F6B7E6771935D9A100D5DD7D /* InfoPlist.strings in Resources */,
 				F6B7E67F1935D9A100D5DD7D /* Images.xcassets in Resources */,
+				F60B5E491938763A00B72078 /* second.png in Resources */,
+				F60B5E481938763A00B72078 /* first@2x.png in Resources */,
 				F6B7E6B9193602E100D5DD7D /* C360DemoController.xib in Resources */,
-				F6B7E6B31936028000D5DD7D /* second@2x.png in Resources */,
-				F6B7E6B21936028000D5DD7D /* second.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
