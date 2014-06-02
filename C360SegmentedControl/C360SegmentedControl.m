@@ -391,6 +391,10 @@
             }
             break;
             
+        case C360SegmentedControlPackingEvenDistribution:
+            rows = [self groupSizesByEvenDistribution:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
+            break;
+            
         case C360SegmentedControlPackingNextFit:
             rows = [self groupSizesByNextFit:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
             break;
@@ -494,6 +498,55 @@
         rowWidthWithSegment += width;
     }
     return rowWidthWithSegment;
+}
+
+- (NSArray *)groupSizesByEvenDistribution:(NSArray *)sizes
+                        intoRowsWithWidth:(CGFloat)width
+                       equalSegmentWidths:(BOOL)equalSegmentWidths
+{
+    CGFloat totalItemWidths = 0, minimumItemWidth = 0, maximumItemWidth = 0;
+    for (NSUInteger i = 0; i < sizes.count; i++)
+    {
+        CGFloat itemWidth = [sizes[i] CGSizeValue].width;
+        totalItemWidths += itemWidth;
+        minimumItemWidth = minimumItemWidth ? MIN(minimumItemWidth, itemWidth) : itemWidth;
+        maximumItemWidth = MAX(maximumItemWidth, itemWidth);
+    }
+    
+    if (equalSegmentWidths)
+    {
+        totalItemWidths = maximumItemWidth * sizes.count;
+    }
+    
+    NSInteger numberOfRows = ceilf(totalItemWidths / width);
+    CGFloat maximumRowWidth = (totalItemWidths / numberOfRows) + minimumItemWidth;
+    
+    NSMutableArray *rows = [NSMutableArray arrayWithCapacity:sizes.count];
+    NSMutableArray *currentRow = nil;
+    CGFloat currentRowWidth = 0;
+    
+    for (NSUInteger i = 0; i < sizes.count; i++)
+    {
+        CGFloat itemWidth = [sizes[i] CGSizeValue].width;
+        if (equalSegmentWidths) itemWidth = maximumItemWidth;
+        
+        if (currentRowWidth + itemWidth >= maximumRowWidth)
+        {
+            currentRow = nil;
+        }
+        
+        if (!currentRow)
+        {
+            currentRow = [NSMutableArray arrayWithCapacity:sizes.count];
+            currentRowWidth = 0;
+            [rows addObject:currentRow];
+        }
+        
+        [currentRow addObject:@(i)];
+        currentRowWidth += itemWidth;
+    }
+    
+    return rows;
 }
 
 - (NSArray *)groupSizesByNextFit:(NSArray *)sizes

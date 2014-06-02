@@ -10,10 +10,11 @@
 
 typedef NS_ENUM(NSInteger, C360SegmentedControlPackingAlgorithm)
 {
-    C360SegmentedControlPackingHorizontal,  // single line
-    C360SegmentedControlPackingVertical,    // multiline, one segment per line
-    C360SegmentedControlPackingNextFit,     // multiline, many per line, preserves order
-    C360SegmentedControlPackingBestFit      // multiline, many per line, may reorder
+    C360SegmentedControlPackingHorizontal,
+    C360SegmentedControlPackingVertical,
+    C360SegmentedControlPackingEvenDistribution,
+    C360SegmentedControlPackingNextFit,
+    C360SegmentedControlPackingBestFit
 };
 
 #define C360SegmentedControlNoSegment UISegmentedControlNoSegment
