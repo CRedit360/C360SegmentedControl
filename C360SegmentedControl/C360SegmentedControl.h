@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-// see http://cgi.csc.liv.ac.uk/~epa/surveyhtml.html
 typedef NS_ENUM(NSInteger, C360SegmentedControlPackingAlgorithm)
 {
-    C360SegmentedControlNextFitPreserveOrdering,
-    C360SegmentedControlBestFitDecreasingHeight
+    C360SegmentedControlPackingHorizontal,  // single line
+    C360SegmentedControlPackingVertical,    // multiline, one segment per line
+    C360SegmentedControlPackingNextFit,     // multiline, many per line, preserves order
+    C360SegmentedControlPackingBestFit      // multiline, many per line, may reorder
 };
 
 #define C360SegmentedControlNoSegment UISegmentedControlNoSegment

@@ -369,12 +369,34 @@
     BOOL equalSegmentWidths = !self.apportionsSegmentWidthsByContent;
     switch (self.packingAlgorithm)
     {
-        case C360SegmentedControlNextFitPreserveOrdering:
-            rows = [self groupSizesByNextFitPreservingOrdering:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
+        case C360SegmentedControlPackingHorizontal:
+            {
+                NSMutableArray *mutableColumns = [NSMutableArray arrayWithCapacity:numberOfSegments];
+                for (NSUInteger i = 0; i < numberOfSegments; i++)
+                {
+                    [mutableColumns addObject:@(i)];
+                }
+                rows = @[ mutableColumns ];
+            }
             break;
             
-        case C360SegmentedControlBestFitDecreasingHeight:
-            rows = [self groupSizesByBestFitDecreasingHeight:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
+        case C360SegmentedControlPackingVertical:
+            {
+                NSMutableArray *mutableRows = [NSMutableArray arrayWithCapacity:numberOfSegments];
+                for (NSUInteger i = 0; i < numberOfSegments; i++)
+                {
+                    [mutableRows addObject:@[ @(i) ]];
+                }
+                rows = mutableRows;
+            }
+            break;
+            
+        case C360SegmentedControlPackingNextFit:
+            rows = [self groupSizesByNextFit:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
+            break;
+            
+        case C360SegmentedControlPackingBestFit:
+            rows = [self groupSizesByBestFit:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
             break;
     }
     
@@ -474,9 +496,9 @@
     return rowWidthWithSegment;
 }
 
-- (NSArray *)groupSizesByNextFitPreservingOrdering:(NSArray *)sizes
-                                 intoRowsWithWidth:(CGFloat)width
-                                equalSegmentWidths:(BOOL)equalSegmentWidths
+- (NSArray *)groupSizesByNextFit:(NSArray *)sizes
+               intoRowsWithWidth:(CGFloat)width
+              equalSegmentWidths:(BOOL)equalSegmentWidths
 {
     NSMutableArray *rows = [NSMutableArray arrayWithCapacity:sizes.count];
     NSMutableArray *currentRow = nil;
@@ -503,9 +525,9 @@
     return rows;
 }
 
-- (NSArray *)groupSizesByBestFitDecreasingHeight:(NSArray *)sizes
-                               intoRowsWithWidth:(CGFloat)width
-                              equalSegmentWidths:(BOOL)equalSegmentWidths
+- (NSArray *)groupSizesByBestFit:(NSArray *)sizes
+               intoRowsWithWidth:(CGFloat)width
+              equalSegmentWidths:(BOOL)equalSegmentWidths
 {
     NSMutableDictionary *sizesByIndex = [NSMutableDictionary dictionaryWithCapacity:sizes.count];
     for (NSUInteger i = 0; i < sizes.count; i++)

@@ -15,174 +15,195 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="98" translatesAutoresizingMaskIntoConstraints="NO" id="tiO-lZ-qvL" customClass="C360SegmentedControl">
-                    <rect key="frame" x="20" y="40" width="280" height="98"/>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="29" translatesAutoresizingMaskIntoConstraints="NO" id="tiO-lZ-qvL" customClass="C360SegmentedControl">
+                    <rect key="frame" x="20" y="40" width="280" height="29"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRn-uG-CaE">
-                    <rect key="frame" x="20" y="146" width="67" height="30"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="I2s-Jw-Z3Y">
+                    <rect key="frame" x="20" y="106" width="280" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Short title">
+                    <segments>
+                        <segment title="Horizontal"/>
+                        <segment title="Vertical"/>
+                        <segment title="Next Fit"/>
+                        <segment title="Best Fit"/>
+                    </segments>
+                    <connections>
+                        <action selector="changePackingAlgorithm:" destination="-1" eventType="valueChanged" id="oc1-3c-695"/>
+                    </connections>
+                </segmentedControl>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Packing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ac-5U-j2R">
+                    <rect key="frame" x="20" y="77" width="62" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apportioning by content" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itM-Ih-oib">
+                    <rect key="frame" x="20" y="142" width="186" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-P3-4Pb">
+                    <rect key="frame" x="20" y="171" width="111" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Segment widths">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="insertSegmentWithShortTitle:" destination="-1" eventType="touchUpInside" id="5P3-Jw-nK4"/>
+                        <action selector="toggleApportionWidthsByContent:" destination="-1" eventType="touchUpInside" id="ZOB-Lr-1fU"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceD-6I-wjP">
-                    <rect key="frame" x="128" y="146" width="64" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5RD-z3-cbM">
+                    <rect key="frame" x="215" y="171" width="85" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Long title">
+                    <state key="normal" title="Row heights">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="insertSegmentWithLongTitle:" destination="-1" eventType="touchUpInside" id="rwS-dN-JWe"/>
+                        <action selector="toggleApportionHeightsByContent:" destination="-1" eventType="touchUpInside" id="XR9-ep-h18"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqd-Ku-bvg">
-                    <rect key="frame" x="257" y="146" width="43" height="30"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content manipulation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbB-0g-Fs4">
+                    <rect key="frame" x="20" y="209" width="165" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Image">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mEc-L9-n84">
+                    <rect key="frame" x="20" y="238" width="280" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="Start"/>
+                        <segment title="Middle"/>
+                        <segment title="End"/>
+                    </segments>
+                    <connections>
+                        <action selector="changeActivityPosition:" destination="-1" eventType="valueChanged" id="fJK-EF-Zye"/>
+                    </connections>
+                </segmentedControl>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZEM-1L-4xK">
+                    <rect key="frame" x="20" y="274" width="280" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="Short title"/>
+                        <segment title="Long title"/>
+                        <segment title="Image"/>
+                    </segments>
+                    <connections>
+                        <action selector="changeActivityContent:" destination="-1" eventType="valueChanged" id="kFQ-bq-Pv2"/>
+                    </connections>
+                </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oa-sr-0uK">
+                    <rect key="frame" x="20" y="310" width="39" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Insert">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="insertSegmentWithImage:" destination="-1" eventType="touchUpInside" id="1Y3-vO-wHx"/>
+                        <action selector="insert:" destination="-1" eventType="touchUpInside" id="ZZV-bv-1In"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syl-Dx-OI4">
-                    <rect key="frame" x="20" y="184" width="86" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jG-K7-4e7">
+                    <rect key="frame" x="85" y="310" width="56" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Remove one">
+                    <state key="normal" title="Replace">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="removeSegment:" destination="-1" eventType="touchUpInside" id="qlf-SQ-vwe"/>
+                        <action selector="replace:" destination="-1" eventType="touchUpInside" id="i2u-AK-6lU"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVH-Rt-Yeh">
-                    <rect key="frame" x="224" y="184" width="76" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUh-z4-hUN">
+                    <rect key="frame" x="243" y="310" width="57" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Remove all">
+                    <state key="normal" title="Remove">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="removeAllSegments:" destination="-1" eventType="touchUpInside" id="fCn-8l-tgn"/>
+                        <action selector="remove:" destination="-1" eventType="touchUpInside" id="T8u-Ee-zED"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaQ-NT-ide">
-                    <rect key="frame" x="20" y="222" width="118" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJh-lq-ES5">
+                    <rect key="frame" x="222" y="348" width="78" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Replace with title">
+                    <state key="normal" title="Remove All">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="replaceSegmentWithTitle:" destination="-1" eventType="touchUpInside" id="0B0-Mh-Zxr"/>
+                        <action selector="removeAllSegments:" destination="-1" eventType="touchUpInside" id="OeF-Sv-jjr"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQa-oD-bIn">
-                    <rect key="frame" x="165" y="222" width="135" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Replace with image">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="replaceSegmentWithImage:" destination="-1" eventType="touchUpInside" id="OOC-wk-6h5"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdm-ub-Im8">
-                    <rect key="frame" x="20" y="260" width="43" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1s-6d-FPk">
+                    <rect key="frame" x="171" y="310" width="43" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Select">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="selectSegment:" destination="-1" eventType="touchUpInside" id="w7y-tr-tTe"/>
+                        <action selector="select:" destination="-1" eventType="touchUpInside" id="h7w-NR-wf7"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-z7-htn">
-                    <rect key="frame" x="78" y="260" width="60" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDh-Po-Uwv">
+                    <rect key="frame" x="20" y="348" width="60" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Deselect">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="deselectSegment:" destination="-1" eventType="touchUpInside" id="Hrp-ta-Hhe"/>
+                        <action selector="deselect:" destination="-1" eventType="touchUpInside" id="QqU-rT-oZy"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0W-om-UYb">
-                    <rect key="frame" x="222" y="260" width="78" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4Y-Cd-ZiS">
+                    <rect key="frame" x="107" y="348" width="78" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Momentary">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="toggleMomentary:" destination="-1" eventType="touchUpInside" id="KXh-cz-hRY"/>
-                    </connections>
-                </button>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="I2s-Jw-Z3Y">
-                    <rect key="frame" x="93" y="298" width="135" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <segments>
-                        <segment title="Preserve"/>
-                        <segment title="Reorder"/>
-                    </segments>
-                    <connections>
-                        <action selector="changeOrdering:" destination="-1" eventType="valueChanged" id="XGK-Te-SSh"/>
-                    </connections>
-                </segmentedControl>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmC-bS-kgB">
-                    <rect key="frame" x="20" y="334" width="96" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Variable width">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleApportionWidthsByContent:" destination="-1" eventType="touchUpInside" id="mWH-Rl-3k5"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIT-9G-gtB">
-                    <rect key="frame" x="212" y="334" width="101" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Variable height">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="toggleApportionHeightsByContent:" destination="-1" eventType="touchUpInside" id="eJp-01-dYP"/>
+                        <action selector="toggleMomentary:" destination="-1" eventType="touchUpInside" id="9yX-Dz-cfM"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="XVH-Rt-Yeh" firstAttribute="top" secondItem="jqd-Ku-bvg" secondAttribute="bottom" constant="8" id="0W9-QQ-Awa"/>
+                <constraint firstAttribute="trailing" secondItem="5RD-z3-cbM" secondAttribute="trailing" constant="20" id="05Z-kF-e00"/>
                 <constraint firstItem="tiO-lZ-qvL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="1E2-59-QAE"/>
-                <constraint firstItem="Bdm-ub-Im8" firstAttribute="top" secondItem="LaQ-NT-ide" secondAttribute="bottom" constant="8" id="3hA-mh-nPF"/>
-                <constraint firstItem="LEY-z7-htn" firstAttribute="top" secondItem="LaQ-NT-ide" secondAttribute="bottom" constant="8" id="7DX-Sn-hfq"/>
+                <constraint firstItem="CUh-z4-hUN" firstAttribute="leading" secondItem="J1s-6d-FPk" secondAttribute="trailing" constant="29" id="677-5D-aiO"/>
+                <constraint firstItem="5Ac-5U-j2R" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="6pK-Ia-7yw"/>
                 <constraint firstAttribute="centerX" secondItem="tiO-lZ-qvL" secondAttribute="centerX" id="8eH-kO-fSp"/>
-                <constraint firstAttribute="trailing" secondItem="iIT-9G-gtB" secondAttribute="trailing" constant="7" id="AGx-ZQ-Hqm"/>
-                <constraint firstAttribute="trailing" secondItem="jqd-Ku-bvg" secondAttribute="trailing" constant="20" id="FBx-yC-kKB"/>
-                <constraint firstItem="I2s-Jw-Z3Y" firstAttribute="top" secondItem="Bdm-ub-Im8" secondAttribute="bottom" constant="8" id="Fb1-QJ-Hp3"/>
-                <constraint firstItem="qRn-uG-CaE" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="Fb2-GO-hpk"/>
-                <constraint firstItem="syl-Dx-OI4" firstAttribute="top" secondItem="qRn-uG-CaE" secondAttribute="bottom" constant="8" id="HGN-5w-N5f"/>
-                <constraint firstAttribute="centerX" secondItem="I2s-Jw-Z3Y" secondAttribute="centerX" constant="-0.5" id="HXp-Li-SfS"/>
-                <constraint firstAttribute="trailing" secondItem="gQa-oD-bIn" secondAttribute="trailing" constant="20" id="K2b-kc-T7E"/>
-                <constraint firstItem="LaQ-NT-ide" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="MAd-tS-D2v"/>
-                <constraint firstAttribute="centerX" secondItem="ceD-6I-wjP" secondAttribute="centerX" id="Q5Y-v3-ey0"/>
-                <constraint firstItem="syl-Dx-OI4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="RP0-sI-hOF"/>
+                <constraint firstItem="J1s-6d-FPk" firstAttribute="top" secondItem="ZEM-1L-4xK" secondAttribute="bottom" constant="8" id="9Nj-MY-zh2"/>
+                <constraint firstAttribute="trailing" secondItem="I2s-Jw-Z3Y" secondAttribute="trailing" constant="20" id="AEY-Ek-rQi"/>
+                <constraint firstItem="cbB-0g-Fs4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="ARZ-Yg-bYK"/>
+                <constraint firstAttribute="trailing" secondItem="ZEM-1L-4xK" secondAttribute="trailing" constant="20" id="F5X-ak-2W0"/>
+                <constraint firstItem="5RD-z3-cbM" firstAttribute="top" secondItem="itM-Ih-oib" secondAttribute="bottom" constant="8" id="IY1-Pe-Ice"/>
+                <constraint firstAttribute="trailing" secondItem="mEc-L9-n84" secondAttribute="trailing" constant="20" id="KO0-Dt-GFa"/>
+                <constraint firstItem="4jG-K7-4e7" firstAttribute="top" secondItem="ZEM-1L-4xK" secondAttribute="bottom" constant="8" id="OcS-eY-Ueu"/>
+                <constraint firstItem="kDh-Po-Uwv" firstAttribute="top" secondItem="4oa-sr-0uK" secondAttribute="bottom" constant="8" id="Tll-7g-kf1"/>
                 <constraint firstAttribute="trailing" secondItem="tiO-lZ-qvL" secondAttribute="trailing" constant="20" id="WZo-B8-CYS"/>
-                <constraint firstItem="a0W-om-UYb" firstAttribute="top" secondItem="gQa-oD-bIn" secondAttribute="bottom" constant="8" id="Y4W-4g-KrV"/>
+                <constraint firstItem="x4Y-Cd-ZiS" firstAttribute="top" secondItem="4oa-sr-0uK" secondAttribute="bottom" constant="8" id="XvL-XA-O2g"/>
+                <constraint firstItem="NqF-P3-4Pb" firstAttribute="top" secondItem="itM-Ih-oib" secondAttribute="bottom" constant="8" id="Ygy-sn-wj0"/>
                 <constraint firstItem="tiO-lZ-qvL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="Yr4-a5-FnO"/>
-                <constraint firstItem="YmC-bS-kgB" firstAttribute="top" secondItem="I2s-Jw-Z3Y" secondAttribute="bottom" constant="8" id="ZsV-7M-JhZ"/>
-                <constraint firstAttribute="trailing" secondItem="a0W-om-UYb" secondAttribute="trailing" constant="20" id="bnT-ar-xbf"/>
-                <constraint firstItem="LaQ-NT-ide" firstAttribute="top" secondItem="syl-Dx-OI4" secondAttribute="bottom" constant="8" id="dI0-XN-h3Z"/>
-                <constraint firstAttribute="trailing" secondItem="XVH-Rt-Yeh" secondAttribute="trailing" constant="20" id="gfc-iB-1uG"/>
-                <constraint firstItem="LEY-z7-htn" firstAttribute="leading" secondItem="Bdm-ub-Im8" secondAttribute="trailing" constant="15" id="hFy-H2-PbI"/>
-                <constraint firstItem="Bdm-ub-Im8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="iH8-7M-z5T"/>
-                <constraint firstItem="ceD-6I-wjP" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="l7S-l3-Wn3"/>
-                <constraint firstItem="gQa-oD-bIn" firstAttribute="top" secondItem="XVH-Rt-Yeh" secondAttribute="bottom" constant="8" id="l8t-8o-fPY"/>
-                <constraint firstItem="jqd-Ku-bvg" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="mb0-Vr-wrx"/>
-                <constraint firstItem="iIT-9G-gtB" firstAttribute="top" secondItem="I2s-Jw-Z3Y" secondAttribute="bottom" constant="8" id="nsX-Ky-ujW"/>
-                <constraint firstItem="qRn-uG-CaE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qUW-9M-anh"/>
-                <constraint firstItem="YmC-bS-kgB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="rw9-oD-LbH"/>
+                <constraint firstItem="itM-Ih-oib" firstAttribute="top" secondItem="I2s-Jw-Z3Y" secondAttribute="bottom" constant="8" id="cHp-A0-sIk"/>
+                <constraint firstItem="mEc-L9-n84" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="fiW-0l-UlA"/>
+                <constraint firstItem="itM-Ih-oib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="hOe-YD-NxM"/>
+                <constraint firstItem="4oa-sr-0uK" firstAttribute="top" secondItem="ZEM-1L-4xK" secondAttribute="bottom" constant="8" id="kaf-qe-uBE"/>
+                <constraint firstAttribute="trailing" secondItem="RJh-lq-ES5" secondAttribute="trailing" constant="20" id="mzW-6l-LgV"/>
+                <constraint firstItem="CUh-z4-hUN" firstAttribute="top" secondItem="ZEM-1L-4xK" secondAttribute="bottom" constant="8" id="p1h-9i-KDw"/>
+                <constraint firstAttribute="trailing" secondItem="CUh-z4-hUN" secondAttribute="trailing" constant="20" id="pKU-Ou-6mO"/>
+                <constraint firstAttribute="centerX" secondItem="mEc-L9-n84" secondAttribute="centerX" id="qOV-Jw-aEW"/>
+                <constraint firstItem="cbB-0g-Fs4" firstAttribute="top" secondItem="NqF-P3-4Pb" secondAttribute="bottom" constant="8" id="r6W-km-YBW"/>
+                <constraint firstItem="I2s-Jw-Z3Y" firstAttribute="top" secondItem="5Ac-5U-j2R" secondAttribute="bottom" constant="8" id="s3l-MO-FGh"/>
+                <constraint firstItem="ZEM-1L-4xK" firstAttribute="top" secondItem="mEc-L9-n84" secondAttribute="bottom" constant="8" id="sS3-zH-elq"/>
+                <constraint firstItem="NqF-P3-4Pb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="sfR-ea-B2A"/>
+                <constraint firstAttribute="centerX" secondItem="x4Y-Cd-ZiS" secondAttribute="centerX" constant="14" id="t0R-Uq-QTw"/>
+                <constraint firstItem="5Ac-5U-j2R" firstAttribute="top" secondItem="tiO-lZ-qvL" secondAttribute="bottom" constant="8" id="ume-Pd-Hjm"/>
+                <constraint firstItem="ZEM-1L-4xK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="vEL-Nb-mhc"/>
+                <constraint firstItem="I2s-Jw-Z3Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="vWH-ak-Wic"/>
+                <constraint firstItem="4jG-K7-4e7" firstAttribute="leading" secondItem="4oa-sr-0uK" secondAttribute="trailing" constant="26" id="whD-3m-KDB"/>
+                <constraint firstItem="mEc-L9-n84" firstAttribute="top" secondItem="cbB-0g-Fs4" secondAttribute="bottom" constant="8" id="wqt-S2-LRD"/>
+                <constraint firstItem="4oa-sr-0uK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="zPV-Oc-av4"/>
+                <constraint firstItem="RJh-lq-ES5" firstAttribute="top" secondItem="CUh-z4-hUN" secondAttribute="bottom" constant="8" id="zW5-rQ-jzi"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

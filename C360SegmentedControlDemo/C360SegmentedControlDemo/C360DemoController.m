@@ -8,9 +8,25 @@
 
 #import "C360DemoController.h"
 
+typedef NS_ENUM(NSInteger, C360DemoControllerActivityPosition)
+{
+    C360DemoControllerActivityStart,
+    C360DemoControllerActivityMiddle,
+    C360DemoControllerActivityEnd
+};
+
+typedef NS_ENUM(NSInteger, C360DemoControllerActivityContent)
+{
+    C360DemoControllerActivityShortTitle,
+    C360DemoControllerActivityLongTitle,
+    C360DemoControllerActivityImage
+};
+
 @interface C360DemoController ()
 
 @property (nonatomic, strong) IBOutlet C360SegmentedControl *segmentedControl;
+@property (nonatomic, assign) C360DemoControllerActivityPosition activityPosition;
+@property (nonatomic, assign) C360DemoControllerActivityContent activityContent;
 
 @end
 
@@ -19,7 +35,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -34,84 +51,7 @@
     [self.segmentedControl insertSegmentWithTitle:@"Three, that's the magic number, I said three, that's the magic number" atIndex:2 animated:NO];
 }
 
-- (IBAction)insertSegmentWithShortTitle:(id)sender
-{
-    NSString *title = @[@"Short", @"Tiny", @"Little"][arc4random() % 3];
-    NSInteger index = self.segmentedControl.numberOfSegments ? arc4random() % (self.segmentedControl.numberOfSegments + 1) : 0;
-    [self.segmentedControl insertSegmentWithTitle:title atIndex:index animated:YES];
-}
-
-- (IBAction)insertSegmentWithLongTitle:(id)sender
-{
-    NSString *title = @[
-        @"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        @"Nulla blandit lectus sit amet erat consectetur, sit amet accumsan nunc porttitor. Vestibulum vestibulum nunc vel velit cursus eleifend.",
-        @"Quisque iaculis elementum eros, in ullamcorper purus ultrices eget. Duis ornare lobortis diam ultricies iaculis. Quisque placerat condimentum quam, at congue tortor dignissim id. Pellentesque non enim tristique, dictum ipsum a, aliquet urna."
-        ][arc4random() % 3];
-    NSInteger index = self.segmentedControl.numberOfSegments ? arc4random() % (self.segmentedControl.numberOfSegments + 1) : 0;
-    [self.segmentedControl insertSegmentWithTitle:title atIndex:index animated:YES];
-}
-
-- (IBAction)insertSegmentWithImage:(id)sender
-{
-    UIImage *image = [UIImage imageNamed:@"first"];
-    NSInteger index = self.segmentedControl.numberOfSegments ? arc4random() % self.segmentedControl.numberOfSegments : 0;
-    [self.segmentedControl insertSegmentWithImage:image atIndex:index animated:YES];
-}
-
-- (IBAction)removeSegment:(id)sender
-{
-    if (self.segmentedControl.numberOfSegments > 0)
-    {
-        NSInteger index = arc4random() % self.segmentedControl.numberOfSegments;
-        [self.segmentedControl removeSegmentAtIndex:index animated:YES];
-    }
-}
-
-- (IBAction)removeAllSegments:(id)sender
-{
-    [self.segmentedControl removeAllSegments];
-}
-
-- (IBAction)replaceSegmentWithTitle:(id)sender
-{
-    if (self.segmentedControl.numberOfSegments > 0)
-    {
-        NSInteger index = arc4random() % self.segmentedControl.numberOfSegments;
-        [self.segmentedControl setTitle:@"Hi! We're the replacements." forSegmentAtIndex:index];
-    }
-}
-
-- (IBAction)replaceSegmentWithImage:(id)sender
-{
-    if (self.segmentedControl.numberOfSegments > 0)
-    {
-        NSInteger index = arc4random() % self.segmentedControl.numberOfSegments;
-        [self.segmentedControl setImage:[UIImage imageNamed:@"second"] forSegmentAtIndex:index];
-    }
-}
-
-- (IBAction)selectSegment:(id)sender
-{
-    if (self.segmentedControl.numberOfSegments > 0)
-    {
-        NSInteger index = arc4random() % self.segmentedControl.numberOfSegments;
-        [self.segmentedControl setSelectedSegmentIndex:index];
-    }
-}
-
-- (IBAction)deselectSegment:(id)sender
-{
-    [self.segmentedControl setSelectedSegmentIndex:C360SegmentedControlNoSegment];
-}
-
-- (IBAction)toggleMomentary:(UIButton *)sender
-{
-    self.segmentedControl.momentary = !self.segmentedControl.momentary;
-    sender.selected = self.segmentedControl.momentary;
-}
-
-- (IBAction)changeOrdering:(UISegmentedControl *)sender
+- (IBAction)changePackingAlgorithm:(UISegmentedControl *)sender
 {
     self.segmentedControl.packingAlgorithm = (C360SegmentedControlPackingAlgorithm)sender.selectedSegmentIndex;
 }
@@ -126,6 +66,145 @@
 {
     self.segmentedControl.apportionsRowHeightsByContent = !self.segmentedControl.apportionsRowHeightsByContent;
     sender.selected =  self.segmentedControl.apportionsRowHeightsByContent;
+}
+
+- (IBAction)changeActivityPosition:(UISegmentedControl *)sender
+{
+    self.activityPosition = (C360DemoControllerActivityPosition)sender.selectedSegmentIndex;
+}
+
+- (IBAction)changeActivityContent:(UISegmentedControl *)sender
+{
+    self.activityContent = (C360DemoControllerActivityContent)sender.selectedSegmentIndex;
+}
+
+#define kShortTitle @"Short"
+#define kLongTitle @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet molestie ipsum, ut condimentum lacus. Donec vulputate id est id venenatis. Nunc rutrum purus nunc, sed egestas massa malesuada id. Nullam mattis justo sit amet odio elementum posuere. Vestibulum nec sem blandit, volutpat lacus posuere, euismod sem. Morbi tempor elit eu commodo sodales. Nullam bibendum convallis enim nec lobortis."
+
+- (IBAction)insert:(id)sender
+{
+    NSInteger index;
+    switch (self.activityPosition) {
+        case C360DemoControllerActivityStart:
+            index = 0;
+            break;
+            
+        case C360DemoControllerActivityMiddle:
+            index = self.segmentedControl.numberOfSegments / 2;
+            break;
+            
+        case C360DemoControllerActivityEnd:
+            index = self.segmentedControl.numberOfSegments;
+            break;
+    }
+    
+    switch (self.activityContent) {
+        case C360DemoControllerActivityShortTitle:
+            [self.segmentedControl insertSegmentWithTitle:kShortTitle atIndex:index animated:YES];
+            break;
+            
+        case C360DemoControllerActivityLongTitle:
+            [self.segmentedControl insertSegmentWithTitle:kLongTitle atIndex:index animated:YES];
+            break;
+            
+        case C360DemoControllerActivityImage:
+            [self.segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"first"] atIndex:index animated:YES];
+            break;
+    }
+}
+
+- (IBAction)replace:(id)sender
+{
+    NSInteger index;
+    switch (self.activityPosition) {
+        case C360DemoControllerActivityStart:
+            index = 0;
+            break;
+            
+        case C360DemoControllerActivityMiddle:
+            index = self.segmentedControl.numberOfSegments / 2;
+            break;
+            
+        case C360DemoControllerActivityEnd:
+            index = self.segmentedControl.numberOfSegments - 1;
+            break;
+    }
+    
+    if (index < 0) return;
+    
+    switch (self.activityContent) {
+        case C360DemoControllerActivityShortTitle:
+            [self.segmentedControl setTitle:kShortTitle forSegmentAtIndex:index];
+            break;
+            
+        case C360DemoControllerActivityLongTitle:
+            [self.segmentedControl setTitle:kLongTitle forSegmentAtIndex:index];
+            break;
+            
+        case C360DemoControllerActivityImage:
+            [self.segmentedControl setImage:[UIImage imageNamed:@"first"] forSegmentAtIndex:index];
+            break;
+    }
+}
+
+- (IBAction)select:(id)sender
+{
+    NSInteger index;
+    switch (self.activityPosition) {
+        case C360DemoControllerActivityStart:
+            index = 0;
+            break;
+            
+        case C360DemoControllerActivityMiddle:
+            index = self.segmentedControl.numberOfSegments / 2;
+            break;
+            
+        case C360DemoControllerActivityEnd:
+            index = self.segmentedControl.numberOfSegments - 1;
+            break;
+    }
+    
+    if (index < 0) return;
+    
+    self.segmentedControl.selectedSegmentIndex = index;
+}
+
+- (IBAction)remove:(id)sender
+{
+    NSInteger index;
+    switch (self.activityPosition) {
+        case C360DemoControllerActivityStart:
+            index = 0;
+            break;
+            
+        case C360DemoControllerActivityMiddle:
+            index = self.segmentedControl.numberOfSegments / 2;
+            break;
+            
+        case C360DemoControllerActivityEnd:
+            index = self.segmentedControl.numberOfSegments - 1;
+            break;
+    }
+    
+    if (index < 0) return;
+    
+    [self.segmentedControl removeSegmentAtIndex:index animated:YES];
+}
+
+- (IBAction)deselect:(id)sender
+{
+    self.segmentedControl.selectedSegmentIndex = C360SegmentedControlNoSegment;
+}
+
+- (IBAction)toggleMomentary:(UIButton *)sender
+{
+    self.segmentedControl.momentary = !self.segmentedControl.momentary;
+    sender.selected = self.segmentedControl.momentary;
+}
+
+- (IBAction)removeAllSegments:(id)sender
+{
+    [self.segmentedControl removeAllSegments];
 }
 
 @end

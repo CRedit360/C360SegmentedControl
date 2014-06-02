@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "C360SegmentedControl"
-  s.version      = "1.1.2"
+  s.version      = "1.2"
   s.summary      = "A UISegmentedControl replacement which supports multiple rows."
   s.description  = <<-DESC
                    A UISegmentedControl replacement which supports multiple rows.
@@ -8,8 +8,9 @@ Pod::Spec.new do |s|
                    of segments in a fixed-width parent such as a table view.
 
                    The control is intended to be a drop-in replacement as far as possible.
-                   Segments can be packed into rows in an order-preserving manner, or a 
-                   more space-efficient manner which may reorder the segments.
+                   Segments can be packed horizontally or vertically, or into rows in an 
+                   order-preserving manner, or a more space-efficient manner which may 
+                   reorder the segments.
                    DESC
   s.homepage     = "https://github.com/CRedit360/C360SegmentedControl"
   s.license      = { :type => "MIT", :file => "LICENSE" }
