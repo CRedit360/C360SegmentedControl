@@ -101,6 +101,7 @@
     newSegment = [[C360SegmentedControlSegment alloc] init];
     newSegment.title = [item isKindOfClass:[NSString class]] ? item : nil;
     newSegment.image = [item isKindOfClass:[UIImage class]] ? item : nil;
+    newSegment.highlightColor = self.highlightColor;
     [self.segments insertObject:newSegment atIndex:index];
     [self insertSubview:newSegment atIndex:index];
     
@@ -637,6 +638,16 @@
     }
     
     return rows;
+}
+
+- (void)setHighlightColor:(UIColor *)highlightColor
+{
+    _highlightColor = highlightColor;
+    
+    for (C360SegmentedControlSegment *segment in self.segments)
+    {
+        segment.highlightColor = highlightColor;
+    }
 }
 
 @end
