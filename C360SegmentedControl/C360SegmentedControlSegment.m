@@ -18,7 +18,9 @@
 
 @end
 
-@implementation C360SegmentedControlSegment
+@implementation C360SegmentedControlSegment {
+    UIColor *_highlightColor;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -26,7 +28,6 @@
     if (self)
     {
         _contentEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4);
-        _highlightColor = [UIColor whiteColor];
         
         _shapeLayer = [[CAShapeLayer alloc] init];
         [self.layer addSublayer:_shapeLayer];
@@ -53,6 +54,11 @@
 - (NSString *)accessibilityLabel
 {
     return self.title.accessibilityLabel ?: self.title ?: self.image.accessibilityLabel;
+}
+
+- (UIColor *)highlightColor
+{
+    return _highlightColor ?: [UIColor whiteColor];
 }
 
 - (void)setHighlightColor:(UIColor *)highlightColor
