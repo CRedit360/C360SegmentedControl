@@ -55,6 +55,7 @@
 
 - (void)commonSetup
 {
+    self.clipsToBounds = YES;
     _items = [NSMutableArray array];
     _segments = [NSMutableArray array];
     _selectedSegmentIndex = C360SegmentedControlNoSegment;
@@ -457,8 +458,14 @@
                     itemWidth = roundf(size.width * rowWidthScale);
                 }
                 
+                CGRect segmentFrame = CGRectMake(left + usedWidth, top, itemWidth, rowHeight);
+                if (self.clipsToBounds)
+                {
+                    segmentFrame = CGRectIntersection(segmentFrame, self.bounds);
+                }
+                
                 C360SegmentedControlSegment *segment = self.segments[itemIndex];
-                segment.frame = CGRectMake(left + usedWidth, top, itemWidth, rowHeight);
+                segment.frame = segmentFrame;
                 segment.firstRow = (rowIndex == 0);
                 segment.lastRow = isLastRow;
                 segment.firstColumn = (columnIndex == 0);
