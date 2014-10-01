@@ -51,6 +51,11 @@
     return self;
 }
 
+- (BOOL)isAccessibilityElement
+{
+    return YES;
+}
+
 - (NSString *)accessibilityLabel
 {
     return self.title.accessibilityLabel ?: self.title ?: self.image.accessibilityLabel;
