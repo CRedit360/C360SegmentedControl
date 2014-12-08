@@ -437,6 +437,7 @@
         {
             CGFloat rowWidthScale = width / rowWidth;
             CGFloat usedWidth = 0;
+            CGFloat equalWidth = width / columns.count;
             
             for (NSUInteger columnIndex = 0; columnIndex < columns.count; columnIndex++)
             {
@@ -450,7 +451,7 @@
                 }
                 else if (equalSegmentWidths)
                 {
-                    itemWidth = roundf(width / columns.count);
+                    itemWidth = roundf((columnIndex+1)*equalWidth) - roundf(columnIndex * equalWidth);
                 }
                 else
                 {
