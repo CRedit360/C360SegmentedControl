@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 CRedit360. All rights reserved.
 //
 
-#import "C360SegmentedControlSegment.h"
+#import "C360SegmentedControlSegmentBase.h"
 
-@interface C360SegmentedControlSegment ()
+@interface C360SegmentedControlSegmentBase ()
 
 @property (nonatomic) CAShapeLayer *shapeLayer;
 @property (nonatomic) UILabel *titleLabel;
@@ -18,9 +18,20 @@
 
 @end
 
-@implementation C360SegmentedControlSegment {
-    UIColor *_highlightColor;
-}
+@implementation C360SegmentedControlSegmentBase
+
+@synthesize contentOffset = _contentOffset;
+@synthesize title = _title;
+@synthesize image = _image;
+
+@synthesize highlightColor = _highlightColor;
+@synthesize momentarilySelected = _momentarilySelected;
+@synthesize lastMomentarySelectionDate = _lastMomentarySelectionDate;
+
+@synthesize firstRow = _firstRow;
+@synthesize lastRow = _lastRow;
+@synthesize firstColumn = _firstColumn;
+@synthesize lastColumn = _lastColumn;
 
 - (id)initWithFrame:(CGRect)frame
 {

@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, C360SegmentedControlPackingAlgorithm)
 
 @property (nonatomic) BOOL apportionsSegmentWidthsByContent;
 @property (nonatomic) BOOL apportionsRowHeightsByContent;
++ (Class)segmentClass;
 
 - (void)insertSegmentWithTitle:(NSString *)title atIndex:(NSUInteger)segment animated:(BOOL)animated;
 - (void)insertSegmentWithImage:(UIImage *)image  atIndex:(NSUInteger)segment animated:(BOOL)animated;
@@ -51,3 +52,22 @@ typedef NS_ENUM(NSInteger, C360SegmentedControlPackingAlgorithm)
 @property (nonatomic) C360SegmentedControlPackingAlgorithm packingAlgorithm;
 
 @end
+
+@protocol C360SegmentedControlSegmentProtocol <NSObject>
+
+@property (nonatomic) CGSize contentOffset;
+@property (nonatomic) NSString *title;
+@property (nonatomic) UIImage *image;
+
+@property (nonatomic) UIColor *highlightColor;
+@property (nonatomic) BOOL momentarilySelected;
+@property (nonatomic) NSDate *lastMomentarySelectionDate;
+
+@property (nonatomic) BOOL firstRow;
+@property (nonatomic) BOOL lastRow;
+@property (nonatomic) BOOL firstColumn;
+@property (nonatomic) BOOL lastColumn;
+
+@end
+
+typedef UIControl<C360SegmentedControlSegmentProtocol> C360SegmentedControlSegment;

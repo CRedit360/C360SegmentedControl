@@ -24,9 +24,10 @@
 		F6B7E6901935D9A100D5DD7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6B7E68E1935D9A100D5DD7D /* InfoPlist.strings */; };
 		F6B7E6921935D9A100D5DD7D /* C360SegmentedControlDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E6911935D9A100D5DD7D /* C360SegmentedControlDemoTests.m */; };
 		F6B7E69F1935DA3900D5DD7D /* C360SegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E69E1935DA3900D5DD7D /* C360SegmentedControl.m */; };
-		F6B7E6A21935E16600D5DD7D /* C360SegmentedControlSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegment.m */; };
+		F6B7E6A21935E16600D5DD7D /* C360SegmentedControlSegmentBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegmentBase.m */; };
 		F6B7E6B8193602E100D5DD7D /* C360DemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7E6B6193602E100D5DD7D /* C360DemoController.m */; };
 		F6B7E6B9193602E100D5DD7D /* C360DemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6B7E6B7193602E100D5DD7D /* C360DemoController.xib */; };
+		F6CA9C4D1C50DFE000D774BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6CA9C4C1C50DFE000D774BA /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,11 +65,12 @@
 		F6B7E6911935D9A100D5DD7D /* C360SegmentedControlDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C360SegmentedControlDemoTests.m; sourceTree = "<group>"; };
 		F6B7E69D1935DA3900D5DD7D /* C360SegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C360SegmentedControl.h; sourceTree = "<group>"; };
 		F6B7E69E1935DA3900D5DD7D /* C360SegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C360SegmentedControl.m; sourceTree = "<group>"; };
-		F6B7E6A01935E16600D5DD7D /* C360SegmentedControlSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C360SegmentedControlSegment.h; sourceTree = "<group>"; };
-		F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C360SegmentedControlSegment.m; sourceTree = "<group>"; };
+		F6B7E6A01935E16600D5DD7D /* C360SegmentedControlSegmentBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C360SegmentedControlSegmentBase.h; sourceTree = "<group>"; };
+		F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegmentBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C360SegmentedControlSegmentBase.m; sourceTree = "<group>"; };
 		F6B7E6B5193602E100D5DD7D /* C360DemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C360DemoController.h; sourceTree = "<group>"; };
 		F6B7E6B6193602E100D5DD7D /* C360DemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C360DemoController.m; sourceTree = "<group>"; };
 		F6B7E6B7193602E100D5DD7D /* C360DemoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C360DemoController.xib; sourceTree = "<group>"; };
+		F6CA9C4C1C50DFE000D774BA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				F6B7E6B5193602E100D5DD7D /* C360DemoController.h */,
 				F6B7E6B6193602E100D5DD7D /* C360DemoController.m */,
 				F6B7E6B7193602E100D5DD7D /* C360DemoController.xib */,
+				F6CA9C4C1C50DFE000D774BA /* LaunchScreen.storyboard */,
 				F6B7E67E1935D9A100D5DD7D /* Images.xcassets */,
 				F6B7E6731935D9A100D5DD7D /* Supporting Files */,
 			);
@@ -184,8 +187,8 @@
 			children = (
 				F6B7E69D1935DA3900D5DD7D /* C360SegmentedControl.h */,
 				F6B7E69E1935DA3900D5DD7D /* C360SegmentedControl.m */,
-				F6B7E6A01935E16600D5DD7D /* C360SegmentedControlSegment.h */,
-				F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegment.m */,
+				F6B7E6A01935E16600D5DD7D /* C360SegmentedControlSegmentBase.h */,
+				F6B7E6A11935E16600D5DD7D /* C360SegmentedControlSegmentBase.m */,
 				F637E34E19372B83004673DA /* Supporting Files */,
 			);
 			name = C360SegmentedControl;
@@ -248,7 +251,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = C360;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = CRedit360;
 				TargetAttributes = {
 					F6B7E6831935D9A100D5DD7D = {
@@ -279,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6CA9C4D1C50DFE000D774BA /* LaunchScreen.storyboard in Resources */,
 				F60B5E471938763A00B72078 /* first.png in Resources */,
 				F60B5E4A1938763A00B72078 /* second@2x.png in Resources */,
 				F6B7E6771935D9A100D5DD7D /* InfoPlist.strings in Resources */,
@@ -304,7 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6B7E6A21935E16600D5DD7D /* C360SegmentedControlSegment.m in Sources */,
+				F6B7E6A21935E16600D5DD7D /* C360SegmentedControlSegmentBase.m in Sources */,
 				F6B7E67D1935D9A100D5DD7D /* C360AppDelegate.m in Sources */,
 				F6B7E6B8193602E100D5DD7D /* C360DemoController.m in Sources */,
 				F6B7E69F1935DA3900D5DD7D /* C360SegmentedControl.m in Sources */,
@@ -368,6 +372,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -430,6 +435,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "C360SegmentedControlDemo/C360SegmentedControlDemo-Prefix.pch";
 				INFOPLIST_FILE = "C360SegmentedControlDemo/C360SegmentedControlDemo-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.credit360.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -443,6 +449,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "C360SegmentedControlDemo/C360SegmentedControlDemo-Prefix.pch";
 				INFOPLIST_FILE = "C360SegmentedControlDemo/C360SegmentedControlDemo-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.credit360.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -464,6 +471,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "C360SegmentedControlDemoTests/C360SegmentedControlDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.credit360.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -482,6 +490,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "C360SegmentedControlDemo/C360SegmentedControlDemo-Prefix.pch";
 				INFOPLIST_FILE = "C360SegmentedControlDemoTests/C360SegmentedControlDemoTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.credit360.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

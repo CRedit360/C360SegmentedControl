@@ -7,7 +7,7 @@
 //
 
 #import "C360SegmentedControl.h"
-#import "C360SegmentedControlSegment.h"
+#import "C360SegmentedControlSegmentBase.h"
 
 @interface C360SegmentedControl ()
 
@@ -67,6 +67,11 @@
     return self.items.count;
 }
 
++ (Class)segmentClass
+{
+    return [C360SegmentedControlSegmentBase class];
+}
+
 - (void)insertSegmentWithItem:(id)item atIndex:(NSUInteger)index animated:(BOOL)animated
 {
     __block C360SegmentedControlSegment *newSegment;
@@ -99,7 +104,7 @@
         NSLog(@"Selected index is now %zd", self.selectedSegmentIndex);
     }
     
-    newSegment = [[C360SegmentedControlSegment alloc] init];
+    newSegment = [[[[self class] segmentClass] alloc] init];
     newSegment.title = [item isKindOfClass:[NSString class]] ? item : nil;
     newSegment.image = [item isKindOfClass:[UIImage class]] ? item : nil;
     newSegment.highlightColor = self.highlightColor;
