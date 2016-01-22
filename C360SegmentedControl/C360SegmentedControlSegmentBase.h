@@ -10,4 +10,12 @@
 
 @interface C360SegmentedControlSegmentBase : UIControl <C360SegmentedControlSegmentProtocol>
 
+@property (nonatomic) UIEdgeInsets contentEdgeInsets;
+@property (nonatomic) UILabel *titleLabel;
+@property (nonatomic) UIImageView *imageView;
+
+@end
+
+@interface C360SegmentedControlShapeSegment : C360SegmentedControlSegmentBase
+
 @end

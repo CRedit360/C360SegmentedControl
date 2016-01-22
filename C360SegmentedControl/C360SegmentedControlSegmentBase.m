@@ -10,12 +10,6 @@
 
 @interface C360SegmentedControlSegmentBase ()
 
-@property (nonatomic) CAShapeLayer *shapeLayer;
-@property (nonatomic) UILabel *titleLabel;
-@property (nonatomic) UIImageView *imageView;
-
-@property (nonatomic) UIEdgeInsets contentEdgeInsets;
-
 @end
 
 @implementation C360SegmentedControlSegmentBase
@@ -39,10 +33,6 @@
     if (self)
     {
         _contentEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4);
-        
-        _shapeLayer = [[CAShapeLayer alloc] init];
-        [self.layer addSublayer:_shapeLayer];
-        self.layer.masksToBounds = NO;
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -146,18 +136,6 @@
     [self setNeedsLayout];
 }
 
-- (void)setSelected:(BOOL)selected
-{
-    [super setSelected:selected];
-    [self updateTintColors];
-}
-
-- (void)setMomentarilySelected:(BOOL)momentarilySelected
-{
-    _momentarilySelected = momentarilySelected;
-    [self updateTintColors];
-}
-
 - (CGSize)sizeThatFits:(CGSize)size
 {
     CGFloat horizontalPadding = self.contentEdgeInsets.left + self.contentEdgeInsets.right;
@@ -189,6 +167,28 @@
     }
     
     return CGSizeMake(contentSize.width + horizontalPadding, contentSize.height + verticalPadding);
+}
+
+@end
+
+@interface C360SegmentedControlShapeSegment ()
+
+@property (nonatomic) CAShapeLayer *shapeLayer;
+
+@end
+
+@implementation C360SegmentedControlShapeSegment
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        _shapeLayer = [[CAShapeLayer alloc] init];
+        [self.layer insertSublayer:_shapeLayer atIndex:0];
+        self.layer.masksToBounds = NO;
+    }
+    return self;
 }
 
 - (void)layoutSubviews
@@ -283,8 +283,21 @@
     [self updateTintColors];
 }
 
+- (void)setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    [self updateTintColors];
+}
+
+- (void)setMomentarilySelected:(BOOL)momentarilySelected
+{
+    [super setMomentarilySelected:momentarilySelected];
+    [self updateTintColors];
+}
+
 - (void)tintColorDidChange
 {
+    [super tintColorDidChange];
     [self updateTintColors];
 }
 

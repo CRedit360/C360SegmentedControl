@@ -69,7 +69,7 @@
 
 + (Class)segmentClass
 {
-    return [C360SegmentedControlSegmentBase class];
+    return [C360SegmentedControlShapeSegment class];
 }
 
 - (void)insertSegmentWithItem:(id)item atIndex:(NSUInteger)index animated:(BOOL)animated
@@ -343,22 +343,22 @@
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
-    size.height = [self performLayoutCalculationsReturningHeightForWidth:size.width performLayout:NO];
-    return size;
+    size.height = 0;
+    return [self performLayoutCalculationsReturningSizeForSize:size performLayout:NO];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self performLayoutCalculationsReturningHeightForWidth:self.bounds.size.width performLayout:YES];
+    [self performLayoutCalculationsReturningSizeForSize:self.bounds.size performLayout:YES];
 }
 
-- (CGFloat)performLayoutCalculationsReturningHeightForWidth:(CGFloat)width performLayout:(BOOL)performLayout
+- (CGSize)performLayoutCalculationsReturningSizeForSize:(CGSize)boundingSize performLayout:(BOOL)performLayout
 {
     NSUInteger numberOfSegments = self.numberOfSegments;
     NSMutableArray *sizes = [NSMutableArray arrayWithCapacity:numberOfSegments];
     
-    CGSize availableSize = CGSizeMake(width, CGFLOAT_MAX);
+    CGSize availableSize = CGSizeMake(boundingSize.width, CGFLOAT_MAX);
     
     for (NSUInteger i = 0; i < numberOfSegments; i++)
     {
@@ -399,15 +399,15 @@
             break;
             
         case C360SegmentedControlPackingEvenDistribution:
-            rows = [self groupSizesByEvenDistribution:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
+            rows = [self groupSizesByEvenDistribution:sizes intoRowsWithWidth:boundingSize.width equalSegmentWidths:equalSegmentWidths];
             break;
             
         case C360SegmentedControlPackingNextFit:
-            rows = [self groupSizesByNextFit:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
+            rows = [self groupSizesByNextFit:sizes intoRowsWithWidth:boundingSize.width equalSegmentWidths:equalSegmentWidths];
             break;
             
         case C360SegmentedControlPackingBestFit:
-            rows = [self groupSizesByBestFit:sizes intoRowsWithWidth:width equalSegmentWidths:equalSegmentWidths];
+            rows = [self groupSizesByBestFit:sizes intoRowsWithWidth:boundingSize.width equalSegmentWidths:equalSegmentWidths];
             break;
     }
     
@@ -423,6 +423,8 @@
             }
         }
     }
+    
+    NSMutableDictionary *segmentFrames = [NSMutableDictionary dictionary];
     
     for (NSUInteger rowIndex = 0; rowIndex < rows.count; rowIndex++)
     {
@@ -440,9 +442,9 @@
         
         if (performLayout)
         {
-            CGFloat rowWidthScale = width / rowWidth;
+            CGFloat rowWidthScale = boundingSize.width / rowWidth;
             CGFloat usedWidth = 0;
-            CGFloat equalWidth = width / columns.count;
+            CGFloat equalWidth = boundingSize.width / columns.count;
             
             for (NSUInteger columnIndex = 0; columnIndex < columns.count; columnIndex++)
             {
@@ -452,7 +454,7 @@
                 CGFloat itemWidth;
                 if (isLastColumn)
                 {
-                    itemWidth = width - usedWidth;
+                    itemWidth = boundingSize.width - usedWidth;
                 }
                 else if (equalSegmentWidths)
                 {
@@ -470,8 +472,9 @@
                     segmentFrame = CGRectIntersection(segmentFrame, self.bounds);
                 }
                 
+                segmentFrames[@(itemIndex)] = [NSValue valueWithCGRect:segmentFrame];
+                
                 C360SegmentedControlSegment *segment = self.segments[itemIndex];
-                segment.frame = segmentFrame;
                 segment.firstRow = (rowIndex == 0);
                 segment.lastRow = isLastRow;
                 segment.firstColumn = (columnIndex == 0);
@@ -483,7 +486,26 @@
         top += rowHeight;
     }
     
-    return top;
+    if (performLayout)
+    {
+        CGFloat multiplier = 1;
+        if ((top > 0) && (boundingSize.height > top))
+        {
+            multiplier = boundingSize.height / top;
+        }
+        
+        for (NSNumber *indexNumber in segmentFrames.allKeys)
+        {
+            CGRect segmentFrame = [segmentFrames[indexNumber] CGRectValue];
+            segmentFrame.origin.y *= multiplier;
+            segmentFrame.size.height *= multiplier;
+            
+            C360SegmentedControlSegment *segment = self.segments[indexNumber.integerValue];
+            segment.frame = segmentFrame;
+        }
+    }
+    
+    return CGSizeMake(boundingSize.width, top);
 }
 
 - (CGFloat)rowWidthByAddingSegmentWithWidth:(CGFloat)width sizes:(NSArray *)sizes currentRow:(NSArray *)currentRow equalSegmentWidths:(BOOL)equalSegmentWidths
